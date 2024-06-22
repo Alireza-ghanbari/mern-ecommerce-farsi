@@ -19,10 +19,7 @@ const UserSchema = new mongoose.Schema(
     phone: {
       unique: [true, "you already have an account with this phone "],
       type: String,
-      match: [
-        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-        "phone invalid",
-      ],
+      required: [true, "phone is required"]
     },
     address: {
       type: String,
@@ -33,6 +30,12 @@ const UserSchema = new mongoose.Schema(
     cart: {
       type: Array,
       default: [],
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      required: true,
+      default: "user",
     },
   },
   { timestamps: true }
